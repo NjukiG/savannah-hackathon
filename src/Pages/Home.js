@@ -5,8 +5,12 @@ const Home = ({
   payerSladeCode,
   setMemberNumber,
   setPayerSladeCode,
-  searchUser,
+  getMemberEligibility,
 }) => {
+  const searchUser = (e) => {
+    e.preventDefault();
+    getMemberEligibility();
+  };
   return (
     <div>
       <form onSubmit={searchUser}>

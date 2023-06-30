@@ -43,7 +43,7 @@ function App() {
   const url2 =
     "https://provider-edi-api.multitenant.slade360.co.ke/v1/beneficiaries/member_eligibility/?member_number=DEMO/001&payer_slade_code=457";
 
-  const searchUser = () => {
+  const getMemberEligibility = () => {
     fetch(url2, { method: "GET", headers })
       .then((response) => response.json())
       .then((data) => console.log(data))
@@ -66,7 +66,7 @@ function App() {
               setMemberNumber={setMemberNumber}
               payerSladeCode={payerSladeCode}
               setPayerSladeCode={setPayerSladeCode}
-              searchUser={searchUser}
+              getMemberEligibility={getMemberEligibility}
             />
           }
         />
