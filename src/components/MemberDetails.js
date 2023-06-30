@@ -207,14 +207,14 @@ const MemberDetails = ({ user, setUser, clientToken }) => {
               <button
                 type="submit"
                 className="btn btn-outline-primary"
-                onClick={getOTP(user.member.contacts[0].id)}
+                // onClick={getOTP(user.member.contacts[0].id)}
               >
                 Send OTP
               </button>
 
-              <button type="submit" className="btn btn-outline-primary">
+              {/* <button type="submit" className="btn btn-outline-primary">
                 Verify OTP
-              </button>
+              </button> */}
             </form>
           </div>
           {OTP === verifyOTP? (
