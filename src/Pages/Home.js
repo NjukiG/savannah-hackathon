@@ -14,6 +14,7 @@ const Home = ({
   };
   return (
     <div className="container">
+      <img src="https://content.gallup.com/origin/gallupinc/GallupSpaces/Production/Cms/WORKPLACEV9CMS/2bgqjhmw_0iifqf_p8twtq.jpg" className="image" />
       <form onSubmit={searchUser}>
         <div className="mb-3">
           <label htmlFor="memberNumber" className="form-label">
@@ -44,7 +45,9 @@ const Home = ({
         <button type="submit" className="btn btn-outline-primary">
           Search
         </button>
-        <Link to="/memberDetails">To Mmber details</Link>
+        <Link className="btn btn-outline-info m-2" to="/memberDetails">
+          To Member details
+        </Link>
       </form>
     </div>
   );
