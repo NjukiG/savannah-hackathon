@@ -6,6 +6,7 @@ import Home from "./Pages/Home";
 import About from "./Pages/About";
 import Team from "./Pages/Team";
 import { useEffect, useState } from "react";
+import GetOTP from "./components/GetOTP";
 
 const CLIENT_ID = "bFrxaipzwQkKZgolvUuntBUHvRhw5G4hkju5OVHr";
 const SECRET_KEY =
@@ -52,8 +53,12 @@ function App() {
       });
   };
 
+  const getOTP = ()=> {
+
+  }
+
   return (
-    <div className="App">
+    <div className="App container">
       <Navbar />
       <Routes>
         <Route
@@ -71,6 +76,7 @@ function App() {
         />
         <Route path="/about" element={<About />} />
         <Route path="/team" element={<Team />} />
+        <Route path="/getOtp" element={<GetOTP />} />
       </Routes>
     </div>
   );

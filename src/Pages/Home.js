@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Home = ({
   memberNumber,
@@ -12,7 +13,7 @@ const Home = ({
     getMemberEligibility();
   };
   return (
-    <div>
+    <div className="container"> 
       <form onSubmit={searchUser}>
         <div className="mb-3">
           <label htmlFor="memberNumber" className="form-label">
@@ -43,6 +44,7 @@ const Home = ({
         <button type="submit" className="btn btn-outline-primary">
           Search
         </button>
+        <Link to="/getOtp">To Mmber details</Link>
       </form>
     </div>
   );
