@@ -13,7 +13,7 @@ const Home = ({
     getMemberEligibility();
   };
   return (
-    <div className="container"> 
+    <div className="container">
       <form onSubmit={searchUser}>
         <div className="mb-3">
           <label htmlFor="memberNumber" className="form-label">
@@ -44,7 +44,7 @@ const Home = ({
         <button type="submit" className="btn btn-outline-primary">
           Search
         </button>
-        <Link to="/getOtp">To Mmber details</Link>
+        <Link to="/memberDetails">To Mmber details</Link>
       </form>
     </div>
   );

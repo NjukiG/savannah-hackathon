@@ -7,6 +7,7 @@ import About from "./Pages/About";
 import Team from "./Pages/Team";
 import { useEffect, useState } from "react";
 import GetOTP from "./components/GetOTP";
+import MemberDetails from "./components/MemberDetails";
 
 const CLIENT_ID = "bFrxaipzwQkKZgolvUuntBUHvRhw5G4hkju5OVHr";
 const SECRET_KEY =
@@ -15,6 +16,7 @@ const SECRET_KEY =
 function App() {
   const [memberNumber, setMemberNumber] = useState("");
   const [payerSladeCode, setPayerSladeCode] = useState("");
+  const [user, setUser] = useState("")
   const URL = "https://accounts.multitenant.slade360.co.ke/oauth2/token/";
 
   const clientData = `grant_type=password&client_id=${CLIENT_ID}&client_secret=${SECRET_KEY}&username=gnjuki19@gmail.com&password=Moringa@2022`;
@@ -38,7 +40,7 @@ function App() {
 
   const headers = {
     Accept: "*/*",
-    Authorization: "Bearer Zp0jznPLNQtF8t6wsw0beHqp75DUxv",
+    Authorization: "Bearer FKP2Em4WcQ8JIJSBuTwLM8ncZ1WcIX",
     "Content-Type": "application/json",
   };
   const url2 =
@@ -76,6 +78,7 @@ function App() {
         />
         <Route path="/about" element={<About />} />
         <Route path="/team" element={<Team />} />
+        <Route path="/memberDetails" element={<MemberDetails user={user} setUser={setUser} />} />
         <Route path="/getOtp" element={<GetOTP />} />
       </Routes>
     </div>
