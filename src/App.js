@@ -83,7 +83,7 @@ function App() {
       });
   };
 
-  getOTP();
+  // getOTP();
 
   return (
     <div className="App container">
@@ -108,7 +108,7 @@ function App() {
           path="/memberDetails"
           element={<MemberDetails user={user} setUser={setUser} />}
         />
-        <Route path="/getOtp" element={<GetOTP />} />
+        <Route path="/getOtp" element={<GetOTP getOTP={getOTP} />} />
       </Routes>
     </div>
   );

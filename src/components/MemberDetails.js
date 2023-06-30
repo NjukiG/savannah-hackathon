@@ -156,7 +156,7 @@ const MemberDetails = ({ user, setUser }) => {
               </div>
             </div>
           </div>
-          <Link to="/authenticate" className="btn btn-info">
+          <Link to="/getOtp" className="btn btn-info">
             Proceed to Authentication
           </Link>
         </div>
