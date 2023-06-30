@@ -14,6 +14,7 @@ const SECRET_KEY =
   "WQqHwb09lDd5emNMTAKWbvDpQlJp6QmYMU2CWP8FwcopIorjYD8rKeNL1hHEUU37tJX6jOzgkSA7GaBLNUg7jZKuyq5r9JDlGUE6R7h4HI7Lb4QJgZj9sXS7VTeexTmk";
 
 function App() {
+  const [clientToken, setClientToken] = useState("")
   const [memberNumber, setMemberNumber] = useState("");
   const [payerSladeCode, setPayerSladeCode] = useState("");
   const [user, setUser] = useState("")
@@ -30,7 +31,10 @@ function App() {
       body: clientData,
     })
       .then((res) => res.json())
-      .then((data) => console.log(data))
+      .then((data) => {
+        console.log(data.access_token)
+        setClientToken(data.access_token)
+      })
       .catch((error) => console.log(error));
   };
 
@@ -40,7 +44,7 @@ function App() {
 
   const headers = {
     Accept: "*/*",
-    Authorization: "Bearer FKP2Em4WcQ8JIJSBuTwLM8ncZ1WcIX",
+    Authorization: `Bearer ${clientToken}`,
     "Content-Type": "application/json",
   };
   const url2 =
@@ -49,7 +53,12 @@ function App() {
   const getMemberEligibility = () => {
     fetch(url2, { method: "GET", headers })
       .then((response) => response.json())
-      .then((data) => console.log(data))
+      .then((data) => {
+        if(memberNumber && payerSladeCode){
+          console.log(data)
+          setUser(data)
+        }
+      })
       .catch((error) => {
         console.log(error);
       });
