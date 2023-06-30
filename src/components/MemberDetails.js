@@ -3,12 +3,10 @@ import { Link } from "react-router-dom";
 
 const MemberDetails = ({ user, setUser, clientToken }) => {
   const [OTP, setOTP] = useState("");
-  const [verifyOTP,setVerifyOTP] = useState("")
+  const [verifyOTP, setVerifyOTP] = useState("");
   const getOTP = (contact_id) => {
     const url3 = `https://provider-edi-api.multitenant.slade360.co.ke/v1/beneficiaries/beneficiary_contacts/${contact_id}/send_otp/`;
     const regex = /is (\d+)/;
-    ;
-   
     fetch(url3, {
       method: "POST",
       headers: {
@@ -188,7 +186,7 @@ const MemberDetails = ({ user, setUser, clientToken }) => {
             >
               Send OTP
             </button> */}
-            <h1>{OTP}</h1>
+            <h1>The patient's OTP is:{OTP}</h1>
 
             <form>
               <div className="mb-3">
@@ -207,7 +205,7 @@ const MemberDetails = ({ user, setUser, clientToken }) => {
               <button
                 type="submit"
                 className="btn btn-outline-primary"
-                // onClick={getOTP(user.member.contacts[0].id)}
+                onClick={getOTP(user.member.contacts[0].id)}
               >
                 Send OTP
               </button>
@@ -217,13 +215,13 @@ const MemberDetails = ({ user, setUser, clientToken }) => {
               </button> */}
             </form>
           </div>
-          {OTP === verifyOTP? (
-        <Link to="/getOtp" className="btn btn-info">
-          Proceed to Authentication
-        </Link>
-      ) : (
-        <p>OTP does not match</p>
-      )}
+          {OTP === verifyOTP ? (
+            <Link to="/startVisit" className="btn btn-info">
+              Proceed to Start Visit
+            </Link>
+          ) : (
+            <p>OTP does not match</p>
+          )}
         </div>
       )}
     </div>

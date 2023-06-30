@@ -8,6 +8,8 @@ import Team from "./Pages/Team";
 import { useEffect, useState } from "react";
 import GetOTP from "./components/GetOTP";
 import MemberDetails from "./components/MemberDetails";
+import StartVisit from "./components/StartVisit";
+import VerifyStartVisitToken from "./components/VerifyStartVisitToken";
 
 const CLIENT_ID = "bFrxaipzwQkKZgolvUuntBUHvRhw5G4hkju5OVHr";
 const SECRET_KEY =
@@ -87,7 +89,97 @@ function App() {
       });
   };
 
-  // getOTP(user.member.contacts[0].id);
+  // Start visit details
+
+  const [startVisitToken, setStartVisitToken] = useState("");
+
+  const getToken = () => {
+    // console.log("NImekua clicked")
+    console.log(OTP);
+    const url =
+      "https://is-api.multitenant.slade360.co.ke/v1/authorizations/start_visit/";
+
+    const headers = {
+      Accept: "application/json",
+      Authorization: `Bearer ${clientToken}`,
+      "Content-Type": "application/json",
+    };
+    const body1 = {
+      beneficiary_id: 636561,
+      factors: ["OTP"],
+      benefit_type: "OUTPATIENT",
+      benefit_code: "BEN/001",
+      policy_number: "POL/001",
+      policy_effective_date: "2023-01-01T00:00:00+03:00",
+      otp: "681671",
+      beneficiary_contact: 5531,
+      scheme_name: "Muungano Scheme",
+      scheme_code: "POL/001",
+    };
+
+    fetch(url, { method: "POST", headers, body: JSON.stringify(body1) })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        setStartVisitToken(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const [startVisitData, setStartVisitData] = useState("");
+  const validateStartVisitToken = () => {
+    const url5 =
+      "https://is-api.multitenant.slade360.co.ke/v1/authorizations/validate_authorization_token/";
+    const headers = {
+      Accept: "application/json",
+      Authorization: `Bearer ${clientToken}`,
+      "Content-Type": "application/json",
+    };
+    const body2 = {
+      first_name: `${startVisitToken.first_name}`,
+      last_name: `${startVisitToken.last_name}`,
+      auth_token: `${startVisitToken.auth_token}`,
+    };
+
+    fetch(url5, { method: "POST", headers, body: JSON.stringify(body2) })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        setStartVisitData(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const [reservedFromAuthorization, setReservedFromAuthoization] = useState("");
+
+  const reserveFromAuthorization = () => {
+    const url =
+      "https://provider-edi-api.multitenant.slade360.co.ke/v1/balances/reservations/reserve_from_authorization/";
+    const headers = {
+      Accept: "application/json",
+      Authorization: `Bearer ${clientToken}`,
+      "Content-Type": "application/json",
+    };
+    const body3 = {
+      authorization: `${startVisitData.authorization_guid}`,
+      invoice_number: "INV/001/TEST",
+      amount: "10000",
+    };
+
+    fetch(url, { method: "POST", headers, body: JSON.stringify(body3) })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        setReservedFromAuthoization(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   return (
     <div className="App container">
@@ -110,11 +202,43 @@ function App() {
         <Route path="/team" element={<Team />} />
         <Route
           path="/memberDetails"
-          element={<MemberDetails user={user} setUser={setUser} clientToken={clientToken} />}
+          element={
+            <MemberDetails
+              user={user}
+              setUser={setUser}
+              clientToken={clientToken}
+            />
+          }
         />
         {/* <Route
           path="/getOtp"
           element={<GetOTP getOTP={getOTP} OTP={OTP} setOTP={setOTP} />}
+        /> */}
+
+        <Route
+          path="/startVisit"
+          element={
+            <StartVisit
+              OTP={OTP}
+              clientToken={clientToken}
+              startVisitToken={startVisitToken}
+              getToken={getToken}
+              validateStartVisitToken={validateStartVisitToken}
+              startVisitData={startVisitData}
+              reservedFromAuthorization={reservedFromAuthorization}
+              reserveFromAuthorization={reserveFromAuthorization}
+            />
+          }
+        />
+
+        {/* <Route
+          path="/verifyStartVisitToken"
+          element={
+            <VerifyStartVisitToken
+              clientToken={clientToken}
+              startVisitToken={startVisitToken}
+            />
+          }
         /> */}
       </Routes>
     </div>
