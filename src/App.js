@@ -5,13 +5,15 @@ import { Route, Routes } from "react-router-dom";
 import Home from "./Pages/Home";
 import About from "./Pages/About";
 import Team from "./Pages/Team";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const CLIENT_ID = "bFrxaipzwQkKZgolvUuntBUHvRhw5G4hkju5OVHr";
 const SECRET_KEY =
   "WQqHwb09lDd5emNMTAKWbvDpQlJp6QmYMU2CWP8FwcopIorjYD8rKeNL1hHEUU37tJX6jOzgkSA7GaBLNUg7jZKuyq5r9JDlGUE6R7h4HI7Lb4QJgZj9sXS7VTeexTmk";
 
 function App() {
+  const [memberNumber, setMemberNumber] = useState("");
+  const [payerSladeCode, setPayerSladeCode] = useState("");
   const URL = "https://accounts.multitenant.slade360.co.ke/oauth2/token/";
 
   const clientData = `grant_type=password&client_id=${CLIENT_ID}&client_secret=${SECRET_KEY}&username=gnjuki19@gmail.com&password=Moringa@2022`;
@@ -50,12 +52,24 @@ function App() {
       });
   };
 
-  getMemberEligibility()
+  // getMemberEligibility();
   return (
     <div className="App">
       <Navbar />
       <Routes>
-        <Route exact path="/" element={<Home />} />
+        <Route
+          exact
+          path="/"
+          element={
+            <Home
+              memberNumber={memberNumber}
+              setMemberNumber={setMemberNumber}
+              payerSladeCode={payerSladeCode}
+              setPayerSladeCode={setPayerSladeCode}
+              get
+            />
+          }
+        />
         <Route path="/about" element={<About />} />
         <Route path="/team" element={<Team />} />
       </Routes>
