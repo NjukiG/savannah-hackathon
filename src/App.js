@@ -18,6 +18,7 @@ function App() {
   const [memberNumber, setMemberNumber] = useState("");
   const [payerSladeCode, setPayerSladeCode] = useState("");
   const [user, setUser] = useState("");
+  const [OTP, setOTP] = useState("");
   const URL = "https://accounts.multitenant.slade360.co.ke/oauth2/token/";
 
   const clientData = `grant_type=password&client_id=${CLIENT_ID}&client_secret=${SECRET_KEY}&username=gnjuki19@gmail.com&password=Moringa@2022`;
@@ -77,13 +78,16 @@ function App() {
       body: JSON.stringify({}),
     })
       .then((response) => response.json())
-      .then((data) => console.log(data))
+      .then((data) => {
+        console.log("THE DATA FROM OTP IS ", data);
+        setOTP(data);
+      })
       .catch((error) => {
         console.log(error);
       });
   };
 
-  // getOTP();
+  // getOTP(user.member.contacts[0].id);
 
   return (
     <div className="App container">
@@ -106,9 +110,12 @@ function App() {
         <Route path="/team" element={<Team />} />
         <Route
           path="/memberDetails"
-          element={<MemberDetails user={user} setUser={setUser} />}
+          element={<MemberDetails user={user} setUser={setUser} clientToken={clientToken} />}
         />
-        <Route path="/getOtp" element={<GetOTP getOTP={getOTP} />} />
+        {/* <Route
+          path="/getOtp"
+          element={<GetOTP getOTP={getOTP} OTP={OTP} setOTP={setOTP} />}
+        /> */}
       </Routes>
     </div>
   );

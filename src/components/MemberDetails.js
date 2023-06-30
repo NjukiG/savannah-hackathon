@@ -1,8 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-const MemberDetails = ({ user, setUser }) => {
-  console.log(user);
+const MemberDetails = ({ user, setUser, clientToken }) => {
+  const [OTP, setOTP] = useState("");
+  const [verifyOTP,setVerifyOTP] = useState("")
+  const getOTP = (contact_id) => {
+    const url3 = `https://provider-edi-api.multitenant.slade360.co.ke/v1/beneficiaries/beneficiary_contacts/${contact_id}/send_otp/`;
+    const regex = /is (\d+)/;
+    ;
+   
+    fetch(url3, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${clientToken}`,
+      },
+      body: JSON.stringify({}),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setOTP(data.success.match(regex)[1]);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  //   console.log(user);
   return (
     <div className="container">
       {user && (
@@ -156,9 +180,50 @@ const MemberDetails = ({ user, setUser }) => {
               </div>
             </div>
           </div>
-          <Link to="/getOtp" className="btn btn-info">
-            Proceed to Authentication
-          </Link>
+          <div>
+            {/* <button
+              type="submit"
+              className="btn btn-outline-primary"
+              onClick={getOTP(user.member.contacts[0].id)}
+            >
+              Send OTP
+            </button> */}
+            <h1>{OTP}</h1>
+
+            <form>
+              <div className="mb-3">
+                <label htmlFor="" className="form-label">
+                  OTP Number:
+                </label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="OTP"
+                  placeholder="Enter otp number here..."
+                  value={verifyOTP}
+                  onChange={(e) => setVerifyOTP(e.target.value)}
+                />
+              </div>
+              <button
+                type="submit"
+                className="btn btn-outline-primary"
+                onClick={getOTP(user.member.contacts[0].id)}
+              >
+                Send OTP
+              </button>
+
+              <button type="submit" className="btn btn-outline-primary">
+                Verify OTP
+              </button>
+            </form>
+          </div>
+          {OTP === verifyOTP? (
+        <Link to="/getOtp" className="btn btn-info">
+          Proceed to Authentication
+        </Link>
+      ) : (
+        <p>OTP does not match</p>
+      )}
         </div>
       )}
     </div>
