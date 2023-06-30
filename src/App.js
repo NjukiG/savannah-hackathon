@@ -57,6 +57,8 @@ function App() {
         if(memberNumber && payerSladeCode){
           console.log(data)
           setUser(data)
+          setMemberNumber("")
+          setPayerSladeCode("")
         }
       })
       .catch((error) => {

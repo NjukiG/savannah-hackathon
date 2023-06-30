@@ -4,7 +4,7 @@ const MemberDetails = ({user, setUser}) => {
 
     console.log(user)
   return (
-    <div>MemberDetails</div>
+    <div>{user&& user.member.id}</div>
   )
 }
 
