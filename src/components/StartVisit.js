@@ -111,18 +111,20 @@ const StartVisit = ({
             >
               Verify Token
             </button>
+            <br />
             {startVisitData && (
               <div>
-                <p>{startVisitData.member_name}</p>
-                <p>{startVisitData.message}</p>
-                <p>{startVisitData.auth_status}</p>
-                <p>{startVisitData.benefit_balance}</p>
-                <p>{startVisitData.reserved_amount}</p>
-                <p>{startVisitData.service_type}</p>
+                <h5>{startVisitData.member_name}</h5>
+                <h5>{startVisitData.message}</h5>
+                <h5>{startVisitData.auth_status}</h5>
+                <h5>{startVisitData.benefit_balance}</h5>
+                <h5>{startVisitData.reserved_amount}</h5>
+                <h5>{startVisitData.service_type}</h5>
               </div>
             )}
           </div>
         )}
+        <br />
 
         {startVisitData && (
           <button
@@ -132,6 +134,7 @@ const StartVisit = ({
             Reserved From Authorization
           </button>
         )}
+        <br />
 
         {startVisitData && reservedFromAuthorization && (
           <div>

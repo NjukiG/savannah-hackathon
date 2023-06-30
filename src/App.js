@@ -184,6 +184,9 @@ function App() {
   return (
     <div className="App container">
       <Navbar />
+      <br />
+      <br />
+      <br />
       <Routes>
         <Route
           exact
