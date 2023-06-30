@@ -41,7 +41,7 @@ function App() {
     "Content-Type": "application/json",
   };
   const url2 =
-    "https://provider-edi-api.multitenant.slade360.co.ke/v1/beneficiaries/member_eligibility/?member_number=DEMO/001&payer_slade_code=457";
+    `https://provider-edi-api.multitenant.slade360.co.ke/v1/beneficiaries/member_eligibility/?member_number=${memberNumber}&payer_slade_code=${payerSladeCode}`;
 
   const getMemberEligibility = () => {
     fetch(url2, { method: "GET", headers })
@@ -52,7 +52,6 @@ function App() {
       });
   };
 
-  // getMemberEligibility();
   return (
     <div className="App">
       <Navbar />
@@ -73,7 +72,6 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/team" element={<Team />} />
       </Routes>
-      <h1>Hello React</h1>
     </div>
   );
 }
