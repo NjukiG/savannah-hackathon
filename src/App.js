@@ -14,14 +14,6 @@ const SECRET_KEY =
 function App() {
   const URL = "https://accounts.multitenant.slade360.co.ke/oauth2/token/";
 
-  // const data = {
-  //   grant_type: "password",
-  //   client_id: "bFrxaipzwQkKZgolvUuntBUHvRhw5G4hkju5OVHr",
-  //   client_secret:
-  //     "WQqHwb09lDd5emNMTAKWbvDpQlJp6QmYMU2CWP8FwcopIorjYD8rKeNL1hHEUU37tJX6jOzgkSA7GaBLNUg7jZKuyq5r9JDlGUE6R7h4HI7Lb4QJgZj9sXS7VTeexTmk",
-  //   username: "gnjuki19@gmail.com",
-  //   password: "Moringa@2022",
-  // };
   const clientData = `grant_type=password&client_id=${CLIENT_ID}&client_secret=${SECRET_KEY}&username=gnjuki19@gmail.com&password=Moringa@2022`;
 
   const getAuthToken = () => {
@@ -41,7 +33,24 @@ function App() {
     getAuthToken();
   }, []);
 
-  
+  const headers = {
+    Accept: "*/*",
+    Authorization: "Bearer Zp0jznPLNQtF8t6wsw0beHqp75DUxv",
+    "Content-Type": "application/json",
+  };
+  const url2 =
+    "https://provider-edi-api.multitenant.slade360.co.ke/v1/beneficiaries/member_eligibility/?member_number=DEMO/001&payer_slade_code=457";
+
+  const getMemberEligibility = () => {
+    fetch(url2, { method: "GET", headers })
+      .then((response) => response.json())
+      .then((data) => console.log(data))
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  getMemberEligibility()
   return (
     <div className="App">
       <Navbar />
