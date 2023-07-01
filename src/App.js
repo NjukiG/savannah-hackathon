@@ -19,8 +19,7 @@ function App() {
   const [OTP, setOTP] = useState("");
   const URL = "https://accounts.multitenant.slade360.co.ke/oauth2/token/";
 
-  const clientData = `grant_type=password&client_id=${CLIENT_ID}&client_secret=${SECRET_KEY}&username=gnjuki19@gmail.com&password=Moringa@2022`;
-
+  // Took out the client keys and the headers for the fetching the token which is the {clientData} param in body.
   const getAuthToken = () => {
     fetch(URL, {
       method: "POST",
