@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Loading from "../components/Loading";
 
 const Home = ({
   memberNumber,
@@ -14,7 +15,10 @@ const Home = ({
   };
   return (
     <div className="container">
-      <img src="https://content.gallup.com/origin/gallupinc/GallupSpaces/Production/Cms/WORKPLACEV9CMS/2bgqjhmw_0iifqf_p8twtq.jpg" className="image" />
+      <img
+        src="https://content.gallup.com/origin/gallupinc/GallupSpaces/Production/Cms/WORKPLACEV9CMS/2bgqjhmw_0iifqf_p8twtq.jpg"
+        className="image"
+      />
       <form onSubmit={searchUser}>
         <div className="mb-3">
           <label htmlFor="memberNumber" className="form-label">

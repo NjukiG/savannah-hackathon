@@ -11,10 +11,6 @@ import MemberDetails from "./components/MemberDetails";
 import StartVisit from "./components/StartVisit";
 import VerifyStartVisitToken from "./components/VerifyStartVisitToken";
 
-const CLIENT_ID = "bFrxaipzwQkKZgolvUuntBUHvRhw5G4hkju5OVHr";
-const SECRET_KEY =
-  "WQqHwb09lDd5emNMTAKWbvDpQlJp6QmYMU2CWP8FwcopIorjYD8rKeNL1hHEUU37tJX6jOzgkSA7GaBLNUg7jZKuyq5r9JDlGUE6R7h4HI7Lb4QJgZj9sXS7VTeexTmk";
-
 function App() {
   const [clientToken, setClientToken] = useState("");
   const [memberNumber, setMemberNumber] = useState("");
